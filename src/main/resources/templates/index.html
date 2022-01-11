@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title  th:text="${title}">Insert title here</title>
+</head>
+<body>
+	<h1 th:text="${title}">title</h1>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>ジャンル</th>
+            <th>作成日付</th>
+            <th>更新日付</th>
+        </tr>
+        <tr th:each="test : ${testList}">
+            <td th:text="${test.id}"></td>
+            <td th:text="${test.genre}"></td>
+            <td th:text="${test.created_at}"></td>
+            <td th:text="${test.updated_at}"></td>
+        </tr>
+    </table>
+</body>
+</html>
