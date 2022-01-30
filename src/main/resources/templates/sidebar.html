@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="sidebar" th:fragment="sidebar1">
+      <table>
+        <tr>
+            <th>ジャンル</th>
+        </tr>
+        <tr th:each="genre : ${listGenre}">
+            <td th:text="${genre.genre}"></td>
+        </tr>
+      </table>
+  </div>
+</body>
+</html>
