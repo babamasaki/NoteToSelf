@@ -3,22 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title  th:text="${title}">Insert title here</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<h1 th:text="${title}">title</h1>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>ジャンル</th>
-            <th>作成日付</th>
-            <th>更新日付</th>
-        </tr>
-        <tr th:each="test : ${testList}">
-            <td th:text="${test.id}"></td>
-            <td th:text="${test.genre}"></td>
-            <td th:text="${test.created_at}"></td>
-            <td th:text="${test.updated_at}"></td>
-        </tr>
-    </table>
+	<div th:replace="header::header1"></div>
+	<div th:replace="sidebar::sidebar1"></div>
+	<div id="main">
+		<h1 th:text="${title}">title</h1>
+	    <table>
+	        <tr>
+	            <th>id</th>
+	            <th>ジャンルID</th>
+	            <th>タイトル</th>
+	            <th>内容</th>
+	            <th>作成日</th>
+	            <th>更新日</th>
+	        </tr>
+	        <tr th:each="listMemo : ${listMemo}">
+	            <td th:text="${listMemo.id}"></td>
+	            <td th:text="${listMemo.genre_id}"></td>
+	            <td th:text="${listMemo.title}"></td>
+	            <td th:text="${listMemo.contents}"></td>
+	            <td th:text="${listMemo.created_at}"></td>
+	            <td th:text="${listMemo.updated_at}"></td>
+	        </tr>
+	    </table>
+    </div>
 </body>
 </html>
