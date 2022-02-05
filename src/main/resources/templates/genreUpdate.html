@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title  th:text="${title}">Insert title here</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div><h1>ジャンル変更画面</h1></div>
+	 <p th:text="${complete}"></p>
+	<div>
+		<form method="post" action="#" th:action="@{/NoteToSelf/genreCreate}" th:object="${genreForm}">
+			<label for="comment">ジャンル名　:　<input id="genre" name="genre" type="text" th:field="*{genre}" /></label>
+				<div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+			<br><input type="submit" value="登録">
+		</form>
+		<form method="get" action="#" th:action="@{/NoteToSelf/index}">
+			<input type="submit" value="戻る">
+		</form>
+	</div>
+</body>
+</html>

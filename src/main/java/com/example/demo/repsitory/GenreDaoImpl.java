@@ -38,4 +38,37 @@ public class GenreDaoImpl implements GenreDao {
 		return list;
 	}
 
+	@Override
+	public void genreInsert(Genre genre) {
+
+		jdbcTemplate.update("INSERT INTO genres(genre, created_at, updated_at) VALUES ( ?, ?, ?)",
+		genre.getGenre(), genre.getCreated_at(), genre.getUpdated_at());
+
+	}
+
+	@Override
+	public boolean genreCheck(Genre genre) {
+
+		String genreName = genre.getGenre();
+
+		String sql = "SELECT * FROM genres WHERE genre = ? limit 1";
+        Map<String, Object> result = jdbcTemplate.queryForMap(sql,genreName);
+
+        //ジャンル名の取得結果
+        String genreChexk = (String)result.get("genre");
+
+        //入力されたジャンルとの重複チェック
+		if(genreName.equals(genreChexk)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void genreUpdate(Genre genre) {
+		jdbcTemplate.update("UPDATE genres SET genre = ?, updated_at = ? HWERE id = ?",
+		genre.getGenre(), genre.getCreated_at(), genre.getId());
+
+	}
+
 }

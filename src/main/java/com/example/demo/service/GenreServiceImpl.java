@@ -21,4 +21,16 @@ public class GenreServiceImpl implements GenreService {
 		return genreDao.findAll();
 	}
 
+	@Override
+	public boolean genreCheck(Genre genre) {
+		return genreDao.genreCheck(genre);
+	}
+
+	@Override
+	public void save(Genre genre) {
+		genreDao.genreInsert(genre);
+	}
+
+
+
 }
