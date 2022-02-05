@@ -1,13 +1,18 @@
 package com.example.demo.app;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entitiy.Genre;
 import com.example.demo.entitiy.Memo;
@@ -45,7 +50,44 @@ public class NoteToSelfController {
 	}
 
 	@GetMapping("/genreCreate")
-	public String genreCreate(Model model) {
+	public String genreCreate(@Validated GenreForm genreForm, Model model) {
+
 		return "genreCreate";
+	}
+	@PostMapping("/genreCreate")
+	public String postGenreCreate(@Validated GenreForm genreForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+
+		if(result.hasErrors()) {
+		//入力エラーが発生した場合ジャンル追加画面に戻る
+			return "genreCreate";
+		}
+
+		Genre genre = new Genre();
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		genre.setGenre(genreForm.getGenre());
+		genre.setCreated_at(timestamp);
+		genre.setUpdated_at(timestamp);
+
+		if(genreService.genreCheck(genre)) {
+			//登録されているジャンルかチェック
+	        model.addAttribute("checkMessage", "すでに登録されています。");
+			return "genreCreate";
+		}
+
+		genreService.save(genre);
+		redirectAttributes.addFlashAttribute("complete","登録完了");
+		return "redirect:/NoteToSelf/index";
+	}
+
+	@GetMapping("/genreUpdate")
+	public String genreUpdate(@Validated GenreForm genreForm, Model model) {
+
+		return "genreUpdate";
+	}
+
+	@PostMapping("/genreUpdate")
+	public String postGenreUpdate(@Validated GenreForm genreForm, Model model) {
+
+		return "genreUpdate";
 	}
 }
