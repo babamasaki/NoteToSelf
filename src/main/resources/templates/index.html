@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title  th:text="${title}">Insert title here</title>
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
 </head>
 <body>
 	<div th:replace="header::header1"></div>
@@ -11,24 +12,47 @@
 	<div id="main">
 		<p th:text="${complete}"></p>
 		<h1 th:text="${title}">title</h1>
-	    <table>
-	        <tr>
-	            <th>id</th>
-	            <th>ジャンルID</th>
-	            <th>タイトル</th>
-	            <th>内容</th>
-	            <th>作成日</th>
-	            <th>更新日</th>
+	    <table class="tableMain">
+	        <tr class="tableTrMain">
+	            <th class="tableThMain">id</th>
+	            <th class="tableThMain">ジャンルID</th>
+	            <th class="tableThMain">タイトル</th>
+	            <th class="tableThMain">内容</th>
+	            <th class="tableThMain">作成日</th>
+	            <th class="tableThMain">更新日</th>
 	        </tr>
-	        <tr th:each="listMemo : ${listMemo}">
-	            <td th:text="${listMemo.id}"></td>
-	            <td th:text="${listMemo.genre_id}"></td>
-	            <td th:text="${listMemo.title}"></td>
-	            <td th:text="${listMemo.contents}"></td>
-	            <td th:text="${listMemo.created_at}"></td>
-	            <td th:text="${listMemo.updated_at}"></td>
+	        <tr th:each="listMemo : ${listMemo}" data-href="/NoteToSelf/memoCreate" class="tableTrMain">
+	            <td class="tableTdMain" th:text="${listMemo.id}"></td>
+	            <td class="tableTdMain" th:text="${listMemo.genre_id}"></td>
+	            <td class="tableTdMain" th:text="${listMemo.title}"></td>
+	            <td class="tableTdMain" th:text="${listMemo.contents}"></td>
+	            <td class="tableTdMain" th:text="${listMemo.created_at}"></td>
+	            <td class="tableTdMain" th:text="${listMemo.updated_at}"></td>
 	        </tr>
 	    </table>
     </div>
 </body>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+  $('tr[data-href]').click(function (e) {
+      if (!$(e.target).is('a')) {
+    	  alert(window.location = $(e.target).data('href'));
+        window.location = $(e.target).data('href');
+
+      };
+  });
+/*]]>*/
+</script>
+
+<!-- <script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+$(document).ready(function() {
+    $("#taskCloseButtn").bind("click" , function() {
+        $("#status").val("cl");
+        url = /*[[ @{/register} ]]*/ 'register.html';
+        goSubmit(url);
+    });
+});
+/*]]>*/
+</script> -->
 </html>

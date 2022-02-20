@@ -19,7 +19,20 @@ public class MemoServiceImpl implements MemoService {
 	@Override
 	public List<Memo> findAll() {
 
-		return memoDao.findAll();
+		return memoDao.findAllDao();
+	}
+
+	@Override
+	public List<Memo> genreById(Memo memo) {
+
+		return memoDao.genreByIdDao(memo);
+	}
+
+	@Override
+	public void memoInsert(Memo memo) {
+
+		memoDao.memoInsertDao(memo);
+
 	}
 
 }
