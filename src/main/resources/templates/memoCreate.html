@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title  th:text="${title}">Insert title here</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div th:replace="header::header1"></div>
+	<div><h1>コンテンツ新規追加画面</h1></div>
+	 <p th:text="${checkMessage}"></p>
+	<div>
+		<form method="post" action="#" th:action="@{/NoteToSelf/memoCreate}" th:object="${memoForm}">
+			<label class="selectLabel">
+				<select id="genreSelect" name="genre_id">
+		 	    	<option th:each="genre : ${listGenre}" th:value="${genre.id}" th:text="${genre.genre}" th:selected="${genre.id == id}" >genreSelect</option>
+				</select>
+			</label>
+			<br><label for="comment" class="titleLabel">タイトル名　:　<input id="memo" name="title" type="text" th:field="*{title}" /></label>
+			<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+			<br><label for="comment" class="titleLabel">メモ内容　:　<textarea id="memo" name="contents"th:field="*{contents}"></textarea></label>
+			<div th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}"></div>
+			<br><input type="submit"  value="登録">
+		</form>
+	</div>
+</body>
+</html>

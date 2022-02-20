@@ -7,12 +7,19 @@
 </head>
 <body>
   <div id="sidebar" th:fragment="sidebar1">
-      <table>
-        <tr>
-            <th>ジャンル</th>
+      <table class="sidebarTable">
+        <tr class="sidebarTr">
+            <th class="heading tag">ジャンル</th>
         </tr>
-        <tr th:each="genre : ${listGenre}">
-            <td th:text="${genre.genre}"></td>
+        <tr class="sidebarTr">
+        	<td class="sidebarTd"><a th:href="@{/NoteToSelf/index}" class="heading tag"><button class="genre_btn">全て</button></a></td>
+        </tr>
+        <tr th:each="genre : ${listGenre}"  class="sidebarTr">
+			<td class="sidebarTd">
+				<a th:href="@{/NoteToSelf/showGenre/{id}(id=${genre.id})}" class="heading tag">
+					<button th:text="${genre.genre}" class="genre_btn"></button>
+				</a>
+			</td>
         </tr>
       </table>
   </div>

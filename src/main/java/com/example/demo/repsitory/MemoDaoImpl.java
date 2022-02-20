@@ -18,7 +18,7 @@ public class MemoDaoImpl implements MemoDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Memo> findAll() {
+	public List<Memo> findAllDao() {
 		String sql = "SELECT * FROM memos";
         List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
         //return用のgenrelist
@@ -36,6 +36,36 @@ public class MemoDaoImpl implements MemoDao {
         	list.add(memo);
         }
 		return list;
+	}
+
+	@Override
+	public List<Memo> genreByIdDao(Memo memo) {
+		String sql = "SELECT * FROM memos"
+				+" WHERE genre_id = " + memo.getGenre_id();
+        List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
+        //return用のgenrelist
+        List<Memo> list = new ArrayList<Memo>();
+        //取得した件数分データをentityに格納する
+        for(Map<String, Object> result: resultList) {
+        	Memo returnMemo = new Memo();
+        	returnMemo.setId((int)result.get("id"));
+        	returnMemo.setId((int)result.get("genre_id"));
+        	returnMemo.setTitle((String)result.get("title"));
+        	returnMemo.setContents((String)result.get("contents"));
+        	returnMemo.setCreated_at((Timestamp) result.get("created_at"));
+        	returnMemo.setUpdated_at((Timestamp) result.get("updated_at"));
+        	//格納したデータをreturn用のgenrelistに格納
+        	list.add(returnMemo);
+        }
+		return list;
+	}
+
+	@Override
+	public void memoInsertDao(Memo memo) {
+
+		jdbcTemplate.update("INSERT INTO memos(genre_id, title, contents, created_at, updated_at) VALUES ( ?, ?, ?, ?, ?)",
+		memo.getGenre_id(),memo.getTitle(), memo.getContents(),memo.getCreated_at(),memo.getUpdated_at());
+
 	}
 
 }

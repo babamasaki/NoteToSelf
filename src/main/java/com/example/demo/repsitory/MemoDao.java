@@ -6,6 +6,10 @@ import com.example.demo.entitiy.Memo;
 
 public interface MemoDao {
 
-	List<Memo> findAll();
+	List<Memo> findAllDao();
+
+	List<Memo> genreByIdDao(Memo memo);
+
+	void memoInsertDao(Memo memo);
 
 }

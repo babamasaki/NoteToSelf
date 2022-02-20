@@ -51,14 +51,14 @@ public class GenreDaoImpl implements GenreDao {
 
 		String genreName = genre.getGenre();
 
-		String sql = "SELECT * FROM genres WHERE genre = ? limit 1";
-        Map<String, Object> result = jdbcTemplate.queryForMap(sql,genreName);
-
-        //ジャンル名の取得結果
-        String genreChexk = (String)result.get("genre");
+		String sql =
+				  "SELECT count(*) "
+				+ "FROM genres "
+				+ "WHERE genre ='" + genreName + "'";
+        int count = jdbcTemplate.queryForObject(sql,Integer.class);
 
         //入力されたジャンルとの重複チェック
-		if(genreName.equals(genreChexk)) {
+		if(0 < count) {
 			return true;
 		}
 		return false;
