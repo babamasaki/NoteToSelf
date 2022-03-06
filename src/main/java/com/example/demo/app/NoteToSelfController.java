@@ -102,7 +102,7 @@ public class NoteToSelfController {
 	public String memoCreate(@Validated MemoForm memoForm, Model model) {
 
 		//登録されているジャンルの取得
-		 List<Genre> listGenre =genreService.findAll();
+		 List<Genre> listGenre = genreService.findAll();
 
 		 model.addAttribute("listGenre",listGenre);
 		return "memoCreate";
@@ -132,19 +132,12 @@ public class NoteToSelfController {
 	@GetMapping(value="/showMemo/{id}")
 	public String showMemo(@PathVariable("id") int id, Model model) {
 
-		//ジャンルの取得
-		 List<Genre> listGenre =genreService.findAll();
-
-		//コンテンツの取得
 		Memo memo = new Memo();
-		memo.setGenre_id(id);
-		 List<Memo>listMemo = memoService.genreById(memo);
+		memo.setId(id);
+		List<Memo> listMemo = memoService.memoById(memo);
+		model.addAttribute("listMemo", listMemo);
 
-		model.addAttribute("title","個別画面");
-		model.addAttribute("id",id);
-        model.addAttribute("listGenre", listGenre);
-        model.addAttribute("listMemo", listMemo);
-		return "showGenre";
+		return "showMemo";
 	}
 
 }

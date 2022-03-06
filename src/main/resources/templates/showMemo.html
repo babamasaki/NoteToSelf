@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title  th:text="${title}">Insert title here</title>
-<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/showMemo.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div th:replace="header::header1"></div>
 	<div><h1>詳細画面</h1></div>
-
+		<table class="showMemo"  th:each="listMemo : ${listMemo}">
+	        <tr class="showMemo">
+	            <th>タイトル</th>
+	            <td th:text="${listMemo.title}" class="showMemo"></td>
+	        </tr>
+	        <tr class="showMemo">
+	            <th>コンテンツ</th>
+	            <td th:text="${listMemo.contents}" class="showMemo"></td>
+	        </tr>
+	    </table>
 </body>
 </html>

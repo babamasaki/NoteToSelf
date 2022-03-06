@@ -15,4 +15,7 @@ public interface MemoService {
 	//メモ情報を追加
 	void memoInsert(Memo memo);
 
+	//ジャンルに紐付いたデータのみを取得
+	List<Memo> memoById(Memo memo);
+
 }
