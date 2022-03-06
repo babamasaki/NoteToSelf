@@ -35,4 +35,9 @@ public class MemoServiceImpl implements MemoService {
 
 	}
 
+	@Override
+	public List<Memo> memoById(Memo memo) {
+		return memoDao.memoByIdDao(memo);
+	}
+
 }

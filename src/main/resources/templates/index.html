@@ -21,7 +21,7 @@
 	            <th class="tableThMain">作成日</th>
 	            <th class="tableThMain">更新日</th>
 	        </tr>
-	        <tr th:each="listMemo : ${listMemo}" data-href="/NoteToSelf/memoCreate" class="tableTrMain">
+	        <tr th:each="listMemo : ${listMemo}" th:attr="data-href='/NoteToSelf/showMemo/' + ${listMemo.id}, id='content-' + ${listMemo.id}" class="tableTrMain">
 	            <td class="tableTdMain" th:text="${listMemo.id}"></td>
 	            <td class="tableTdMain" th:text="${listMemo.genre_id}"></td>
 	            <td class="tableTdMain" th:text="${listMemo.title}"></td>
@@ -32,27 +32,11 @@
 	    </table>
     </div>
 </body>
-<script type="text/javascript" th:inline="javascript">
-/*<![CDATA[*/
+<script type="text/javascript">
   $('tr[data-href]').click(function (e) {
       if (!$(e.target).is('a')) {
-    	  alert(window.location = $(e.target).data('href'));
-        window.location = $(e.target).data('href');
-
+      	  window.location = $(e.currentTarget).data('href');
       };
   });
-/*]]>*/
 </script>
-
-<!-- <script type="text/javascript" th:inline="javascript">
-/*<![CDATA[*/
-$(document).ready(function() {
-    $("#taskCloseButtn").bind("click" , function() {
-        $("#status").val("cl");
-        url = /*[[ @{/register} ]]*/ 'register.html';
-        goSubmit(url);
-    });
-});
-/*]]>*/
-</script> -->
 </html>
