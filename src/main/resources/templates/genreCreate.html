@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title  th:text="${title}">Insert title here</title>
-<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/form-style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div th:replace="header::header1"></div>
@@ -11,9 +11,23 @@
 	 <p th:text="${checkMessage}"></p>
 	<div>
 		<form method="post" action="#" th:action="@{/NoteToSelf/genreCreate}" th:object="${genreForm}">
-			<label for="comment">ジャンル名　:　<input id="genre" name="genre" type="text" th:field="*{genre}" /></label>
-				<div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
-			<br><input type="submit" value="登録">
+			<table class="showMemo">
+			    <tr class="showMemo">
+		            <th>ジャンル名</th>
+		            <td>
+			            <div class="cp_iptxt">
+			            	<input id="genre" name="genre" type="text" th:field="*{genre}" placeholder="genre"/>
+			            	<div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+			            </div>
+		            </td>
+		        </tr>
+		        	<tr class="showMemo">
+		            	<th>ジャンル名</th>
+		            	<td>
+		            		<input type="submit" class="btn_03" value="登録">
+		            	</td>
+		        </tr>
+		    </table>
 		</form>
 	</div>
 </body>

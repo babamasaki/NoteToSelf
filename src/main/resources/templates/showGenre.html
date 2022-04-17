@@ -11,32 +11,22 @@
 	<div th:replace="sidebar::sidebar1"></div>
 	<div id="main">
 		<p th:text="${complete}"></p>
-		<h1 th:text="${title}">title</h1>
 	    <table class="tableMain">
 	        <tr class="tableTrMain">
 	            <th class="tableThMain">id</th>
-	            <th class="tableThMain">ジャンルID</th>
 	            <th class="tableThMain">タイトル</th>
 	            <th class="tableThMain">内容</th>
-	            <th class="tableThMain">作成日</th>
 	            <th class="tableThMain">更新日</th>
 	        </tr>
 	        <tr th:each="listMemo : ${listMemo}"  th:attr="data-href='/NoteToSelf/showMemo/' + ${listMemo.id}, id='content-' + ${listMemo.id}"  class="tableTrMain">
 	            <td th:text="${listMemo.id}" class="tableTdMain" ></td>
-	            <td th:text="${listMemo.genre_id}" class="tableTdMain" ></td>
 	            <td th:text="${listMemo.title}" class="tableTdMain" ></td>
-	            <td th:text="${listMemo.contents}" class="tableTdMain" ></td>
-	            <td th:text="${listMemo.created_at}" class="tableTdMain" ></td>
+	            <td class="tableTdMain" th:if="${25 <= #strings.length(listMemo.contents)}" th:text="|${#strings.substring(listMemo.contents,0,24)}...|"></td>
+	            <td class="tableTdMain" th:if="${25 >= #strings.length(listMemo.contents)}" th:text="${listMemo.contents}"></td>
 	            <td th:text="${listMemo.updated_at}" class="tableTdMain" ></td>
 	        </tr>
 	    </table>
     </div>
 </body>
-<script type="text/javascript">
-  $('tr[data-href]').click(function (e) {
-      if (!$(e.target).is('a')) {
-      	  window.location = $(e.currentTarget).data('href');
-      };
-  });
-</script>
+<script th:src="@{/js/data-href.js}"></script>
 </html>

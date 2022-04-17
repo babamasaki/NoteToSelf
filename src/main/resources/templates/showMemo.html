@@ -8,15 +8,24 @@
 <body>
 	<div th:replace="header::header1"></div>
 	<div><h1>詳細画面</h1></div>
-		<table class="showMemo"  th:each="listMemo : ${listMemo}">
-	        <tr class="showMemo">
-	            <th>タイトル</th>
-	            <td th:text="${listMemo.title}" class="showMemo"></td>
-	        </tr>
-	        <tr class="showMemo">
-	            <th>コンテンツ</th>
-	            <td th:text="${listMemo.contents}" class="showMemo"></td>
-	        </tr>
-	    </table>
+	<table class="showMemo"  th:each="listMemo : ${listMemo}">
+	    <tr class="showMemo">
+            <th>更新</th>
+            <td><a th:href="@{/NoteToSelf/memoUpdate/{id}(id=${listMemo.memoId})}" class="btn_03">編集</a></td>
+        </tr>
+        <tr class="showMemo">
+            <th>ジャンル</th>
+            <td th:text="${listMemo.genre}">ジャンルを表示させる</td>
+        </tr>
+        <tr class="showMemo">
+            <th>タイトル</th>
+            <td th:text="${listMemo.title}" class="showMemo">
+            </td>
+        </tr>
+        <tr class="showMemo">
+            <th>コンテンツ</th>
+            <td th:text="${listMemo.contents}" class="showMemo"></td>
+        </tr>
+    </table>
 </body>
 </html>

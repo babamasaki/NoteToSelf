@@ -13,12 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entitiy.Genre;
+import com.example.demo.entitiy.JsonNoteToSelf;
 import com.example.demo.entitiy.Memo;
+import com.example.demo.entitiy.NoteToSelf;
 import com.example.demo.service.GenreService;
 import com.example.demo.service.MemoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/NoteToSelf")
@@ -76,7 +82,6 @@ public class NoteToSelfController {
 		}
 
 		genreService.save(genre);
-		redirectAttributes.addFlashAttribute("complete","登録完了");
 		return "redirect:/NoteToSelf/index";
 	}
 
@@ -134,10 +139,76 @@ public class NoteToSelfController {
 
 		Memo memo = new Memo();
 		memo.setId(id);
-		List<Memo> listMemo = memoService.memoById(memo);
+		List<Memo> memoGenreId = memoService.memoById(memo);
+		memo.setGenre_id(memoGenreId.get(0).getGenre_id());
+		List<NoteToSelf> listMemo = memoService.showMemo(memo);
 		model.addAttribute("listMemo", listMemo);
 
 		return "showMemo";
 	}
 
+	@GetMapping("/memoUpdate/{id}")
+	public String memoUpdate(@Validated MemoForm memoForm, @PathVariable("id") int id, Model model) {
+
+		//登録されているジャンルの取得
+		 List<Genre> listGenre = genreService.findAll();
+
+		//update対象のコンテンツを取得
+		Memo memo = new Memo();
+		memo.setId(id);
+		List<Memo> listMemo = memoService.memoById(memo);
+		memoForm.setGenre_id(listMemo.get(0).getGenre_id());
+		memoForm.setTitle(listMemo.get(0).getTitle());
+		memoForm.setContents(listMemo.get(0).getContents());
+
+		model.addAttribute("memoId",id);
+		model.addAttribute("listGenre",listGenre);
+		model.addAttribute("memoForm", memoForm);
+
+		return "memoUpdate";
+	}
+
+	@PostMapping("/memoUpdate")
+	public String memoUpdate(@Validated MemoForm memoForm, BindingResult result, @RequestParam("memoId") int memoId, Model model, RedirectAttributes redirectAttributes) {
+
+		if(result.hasErrors()) {
+		//入力エラーが発生した場合ジャンル追加画面に戻る
+			return "/memoUpdate/" + memoId;
+		}
+
+		Memo memo = new Memo();
+		memo.setId(memoId);
+		memo.setGenre_id(memoForm.getGenre_id());
+		memo.setTitle(memoForm.getTitle());
+		memo.setContents(memoForm.getContents());
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		memo.setUpdated_at(timestamp);
+
+		memoService.memoUpdate(memo);
+
+		return  "redirect:/NoteToSelf/index";
+	}
+
+	@PostMapping("/memoSearch")
+	@ResponseBody
+	public String memoSearch(@RequestParam String note, Model model) {
+
+		Memo memo = new Memo();
+		memo.setTitle(note);
+
+		List<JsonNoteToSelf> listMemo = memoService.memoSearch(memo);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+        String json =null;
+		try {
+			json = mapper.writeValueAsString(listMemo);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+        System.out.println(json);
+
+		return json;
+	}
 }
