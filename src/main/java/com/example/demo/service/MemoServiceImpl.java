@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entitiy.JsonNoteToSelf;
 import com.example.demo.entitiy.Memo;
+import com.example.demo.entitiy.NoteToSelf;
 import com.example.demo.repsitory.MemoDao;
 
 @Service
@@ -38,6 +40,22 @@ public class MemoServiceImpl implements MemoService {
 	@Override
 	public List<Memo> memoById(Memo memo) {
 		return memoDao.memoByIdDao(memo);
+	}
+
+	@Override
+	public void memoUpdate(Memo memo) {
+		memoDao.memoUpdate(memo);
+
+	}
+
+	@Override
+	public List<NoteToSelf> showMemo(Memo memo) {
+		return 	memoDao.showMemo(memo);
+	}
+
+	@Override
+	public List<JsonNoteToSelf> memoSearch(Memo memo) {
+		return 	memoDao.memoSearch(memo);
 	}
 
 }

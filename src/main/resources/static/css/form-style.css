@@ -44,8 +44,6 @@ table td{
   background-color: #eee;
   padding: 10px 0;
   padding-left:20px;
-  white-space: pre-wrap;
-
 }
 
 /* 編集ボタン */
@@ -96,4 +94,16 @@ section {
   border-right: 2px solid #FFC107;
 }
 
+/* textarea */
 
+.cp_iptextarea input[type='textarea'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 90%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #ffffff;
+	box-shadow: 1px 1px 2px 0 #707070 inset;
+	border-radius: 4px;
+}
