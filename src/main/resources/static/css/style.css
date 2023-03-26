@@ -1,0 +1,219 @@
+@charset "UTF-8";
+
+/* サイドバー */
+div#sidebar {
+    float: left;
+    height: 500px;
+    width: 200px;
+    color: white;
+    padding-top: 90px;
+}
+
+/* 一覧画面 */
+div#main {
+    float: light;
+    height: 500px;
+    padding-top: 80px;
+    padding-left: 300px;
+}
+/* header */
+nav{
+  width: 80%;
+  height: 70px;
+  padding-top: 5px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+ul{
+  display: flex;
+}
+li{
+  list-style: none;
+}
+a{
+  display: block;
+  text-decoration: none;
+  color: white;
+  margin-right: 35px;
+}
+
+a:hover{
+  color: rgb(214, 237, 248);
+}
+.search-block{
+  display: inline-block;
+}
+
+/* 検索ボタン */
+
+.search_container{
+  box-sizing: border-box;
+}
+.search_container input[type="text"]{
+  border: 1px solid #999;
+  padding: 3px 5px;
+  border-radius: 20px;
+  height: 2.0em;
+  width: 245px;
+  overflow: hidden;
+}
+.search_container input[type="text"]:focus {
+  outline: 0;
+}
+
+
+/* テーブルサイドバー */
+table.sidebarTable{
+  width: 250px;
+  border-collapse: collapse;
+  height: 80px;
+}
+table tr.sidebarTr{
+  width: 100%;
+  height: 100%;
+}
+
+table td.sidebarTd{
+  width: 100%;
+  height: 100%;
+}
+
+.heading.tag {
+    text-decoration: none;
+    padding: 0.5rem;
+    background: #fff;
+    border-left: solid 6px #FFC107;
+    color: #FFC107;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+    width: 100%;
+}
+
+/* テーブルメイン */
+table.tableMain {
+  border-collapse: collapse;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 15px -6px #00000073;
+}
+
+table tr.tableTrMain {
+  background-color: #fff;
+}
+
+table th.tableThMain {
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+table td.tableTdMain {
+  border-bottom: 1px solid #eee;
+}
+
+table  th.tableThMain {
+  width: 20%;
+  padding: 10px 0;
+  font-size: 14px;
+  padding: 15px;
+  background-color: #FFC107;
+  color:#fff;
+}
+
+table tr.tableTrMain{
+  text-align: center;
+  width: 20%;
+  height: 20px;
+  padding: 20px 0;
+  background-color: #fff;
+  color:#3a3a3a;
+}
+
+table tr.tableTrMain:hover{
+  background-color: #d4faff;
+}
+
+
+.genre_btn{
+  width: 100%;
+  hight: 100%;
+    border: none;
+  background: transparent;
+}
+
+label.titleLabel{
+	align-top:100px;
+
+}
+a.contentsShow{
+	display:block;
+	width:100%;
+	height:100%;
+}
+a.contentsShow:hover {
+	background-color:#ffcccc;
+}
+
+/* textbox */
+
+.cp_iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 90%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border: 1px solid #ffffff;
+	box-shadow: 1px 1px 2px 0 #707070 inset;
+	border-radius: 4px;
+}
+
+
+
+/* セレクトボックス */
+
+.cp_ipselect {
+	overflow: hidden;
+	width: 50%;
+	text-align: center;
+}
+.cp_ipselect select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+.cp_ipselect select::-ms-expand {
+    display: none;
+}
+.cp_ipselect.cp_sl05 {
+	position: relative;
+	border-radius: 2px;
+  border-radius: 50px;
+	background: #FFC107;
+}
+.cp_ipselect.cp_sl05::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #ffffff;
+	pointer-events: none;
+}
+.cp_ipselect.cp_sl05 select {
+	padding: 8px 38px 8px 8px;
+	color: #ffffff;
+}

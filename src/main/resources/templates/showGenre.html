@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title  th:text="${title}">Insert title here</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+</head>
+<body>
+	<div th:replace="header::header1"></div>
+	<div th:replace="sidebar::sidebar1"></div>
+	<div id="main">
+		<p th:text="${complete}"></p>
+	    <table class="tableMain">
+	        <tr class="tableTrMain">
+	            <th class="tableThMain">id</th>
+	            <th class="tableThMain">タイトル</th>
+	            <th class="tableThMain">内容</th>
+	            <th class="tableThMain">更新日</th>
+	        </tr>
+	        <tr th:each="listMemo : ${listMemo}"  th:attr="data-href='/NoteToSelf/showMemo/' + ${listMemo.id}, id='content-' + ${listMemo.id}"  class="tableTrMain">
+	            <td th:text="${listMemo.id}" class="tableTdMain" ></td>
+	            <td th:text="${listMemo.title}" class="tableTdMain" ></td>
+	            <td class="tableTdMain" th:if="${25 <= #strings.length(listMemo.contents)}" th:text="|${#strings.substring(listMemo.contents,0,24)}...|"></td>
+	            <td class="tableTdMain" th:if="${25 >= #strings.length(listMemo.contents)}" th:text="${listMemo.contents}"></td>
+	            <td th:text="${listMemo.updated_at}" class="tableTdMain" ></td>
+	        </tr>
+	    </table>
+    </div>
+</body>
+<script th:src="@{/js/data-href.js}"></script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title  th:text="${title}">Insert title here</title>
+<link th:href="@{/css/form-style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div th:replace="header::header1"></div>
+	<div><h1>編集画面</h1></div>
+	<form method="post" action="#" th:action="@{/NoteToSelf/memoUpdate}" th:object="${memoForm}">
+		<input  th:if="${memoId}" type="hidden" name="memoId" th:value="${memoId}">
+		<table class="showMemo">
+		    <tr class="showMemo">
+	            <th>更新</th>
+	            <td><input type="submit"  class="btn_03" value="更新"></td>
+	        </tr>
+	        <tr class="showMemo">
+	            <th>ジャンル</th>
+	            <td>
+		            <div class="cp_ipselect cp_sl05">
+	 	            	<select id="genreSelect" name="genre_id">
+				 	    	<option th:each="genre : ${listGenre}" th:value="${genre.id}" th:text="${genre.genre}" th:selected="${genre.id == id}" >genreSelect</option>
+						</select>
+					</div>
+	            </td>
+	        </tr>
+	        <tr class="showMemo">
+	            <th>タイトル</th>
+	            <td class="showMemo"><input id="memo" name="title" type="text" th:field="*{title}"  style="width: 90%;"/></td>
+	        </tr>
+	        <tr class="showMemo">
+	            <th>コンテンツ</th>
+	            <td class="showMemo"><textarea id="memo" name="contents" th:field="*{contents}" style="width: 90%;"></textarea></td>
+	        </tr>
+	    </table>
+	   </form>
+</body>
+</html>
+<!-- memo -->
